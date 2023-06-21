@@ -37,11 +37,29 @@ We will analyze the Sex of the patients and the result if they are alive or dead
 
 
 
-## Graphical results - use ggplot commands to do this  
 
 
 
-  
+## Graphical results - use ggplot commands to do this 
+
+
+#### Plot barplots ggplot way
+```{r}
+dd2 <- kRdata %>% group_by(result,Sex) %>% summarize(count=n()) %>% mutate(prcnt=count/sum(count))
+
+
+# the group_by followed by summarize(count=n())
+
+basicC <- ggplot(dd2,aes(x=result,y=count,fill=Sex))
+basicC + geom_bar(stat="identity",position="dodge")
+
+#Now for percentage plot
+
+basicCC <- ggplot(dd2,aes(x=result,y=prcnt*100,fill=Sex)) 
+basicCC + geom_bar(stat="identity", position = "dodge")
+```
+
+ In the counting chart I can see that not a lot people died. it is 50-70. In the percentage female is 50% is alive male is about 40. There is more female than male. Twice as many male are dying.  
 
 
 
